@@ -1,0 +1,11 @@
+
+namespace packets;
+
+
+table Messagenfy {
+	userId:int;
+	userName:string;
+	message:string;
+}
+
+root_type Messagenfy;

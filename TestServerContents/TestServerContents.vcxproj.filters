@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Contents">
+      <UniqueIdentifier>{be53343a-eeaf-4451-9fb0-d72d49b404ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Server">
+      <UniqueIdentifier>{f8d9eeee-4c68-4f03-8633-2ad609234c66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Server\Impl">
+      <UniqueIdentifier>{c5c3fb47-f921-4a28-9879-b23ae98041c3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="CContextLogin.cpp">
+      <Filter>Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerManager.cpp">
+      <Filter>Server</Filter>
+    </ClCompile>
+    <ClCompile Include="ContentsServer.cpp">
+      <Filter>Server\Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="CContextLogin.h">
+      <Filter>Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerManager.h">
+      <Filter>Server</Filter>
+    </ClInclude>
+    <ClInclude Include="ContentsServer.h">
+      <Filter>Server\Impl</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

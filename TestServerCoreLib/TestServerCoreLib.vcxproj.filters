@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Network">
+      <UniqueIdentifier>{9d563df4-ed78-4f44-95c1-4af017c7475f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network\Mode">
+      <UniqueIdentifier>{62fe0029-7957-4a7a-871d-6bb4f3c66822}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network\MessageProc">
+      <UniqueIdentifier>{c90b73f7-5021-4add-beaa-f814ee559ae3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Task">
+      <UniqueIdentifier>{7bdb0c96-ecf9-404e-ba1d-392609fbd86d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Server">
+      <UniqueIdentifier>{35b96600-1389-42fd-8ed4-074cf60049a1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="NetworkSelectMode.h">
+      <Filter>Network\Mode</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkMode.h">
+      <Filter>Network\Mode</Filter>
+    </ClInclude>
+    <ClInclude Include="MessageContextBase.h">
+      <Filter>Network\MessageProc</Filter>
+    </ClInclude>
+    <ClInclude Include="RecvTask.h">
+      <Filter>Task</Filter>
+    </ClInclude>
+    <ClInclude Include="Receiver.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerTask.h">
+      <Filter>Server</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerBase.h">
+      <Filter>Server</Filter>
+    </ClInclude>
+    <ClInclude Include="SessionManager.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Session.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Listener.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="NetworkSelectMode.cpp">
+      <Filter>Network\Mode</Filter>
+    </ClCompile>
+    <ClCompile Include="Listener.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Receiver.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="RecvTask.cpp">
+      <Filter>Task</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerBase.cpp">
+      <Filter>Server</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerTask.cpp">
+      <Filter>Server</Filter>
+    </ClCompile>
+    <ClCompile Include="SessionManager.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Session.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="TestServer.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+  </ItemGroup>
+</Project>

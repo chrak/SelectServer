@@ -1,0 +1,31 @@
+syntax = "proto3";
+package packets;
+
+import "types.proto";
+
+message LoginReq {
+    string ID = 1;
+	string Pass = 2;
+}
+
+message LoginAck {
+	int64 UserID = 1;
+	ResultType Result = 2;
+}
+
+message MessageReq {
+    int64 UserID = 1;
+    string Message = 2;
+}
+
+message MessageNfy {
+	int64 UserID = 1;
+	string UserName = 2;
+	string Message = 3;
+}
+
+
+
+
+
+

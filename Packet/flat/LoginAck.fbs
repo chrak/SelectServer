@@ -1,0 +1,13 @@
+
+namespace packets;
+
+
+enum ResultType:byte { RESULT_SUCCESS = 0, RESULT_FAILED = 1 }
+
+table LoginAck {
+	serial:int;
+	id:string;
+	result:ResultType;
+}
+
+root_type LoginAck;

@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Common">
+      <UniqueIdentifier>{cfb00a8c-06f3-4838-a88f-f1bea142d686}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\MemoryPool">
+      <UniqueIdentifier>{c36fc908-d3f0-455b-90c1-9b0f4b6c5562}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Struct">
+      <UniqueIdentifier>{ddd02b9c-2835-4ad3-8f11-dbd36c24b6be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Define">
+      <UniqueIdentifier>{c076cfb1-d226-4d39-99a7-24cfb65947b6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="ThreadRegister.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadRegister.hpp">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="TaskBase.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="PoolObject.h">
+      <Filter>Common\MemoryPool</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryPool.h">
+      <Filter>Common\MemoryPool</Filter>
+    </ClInclude>
+    <ClInclude Include="CommonDef.h">
+      <Filter>Common\Define</Filter>
+    </ClInclude>
+    <ClInclude Include="structure.h">
+      <Filter>Common\Struct</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.hpp">
+      <Filter>Common</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="TaskBase.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="MemoryPool.hpp">
+      <Filter>Common\MemoryPool</Filter>
+    </ClCompile>
+    <ClCompile Include="PacketDef.h">
+      <Filter>Common\Define</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,14 @@
+syntax = "proto3";
+package packets;
+
+enum PacketCode {
+    LOGIN_REQ = 0;
+    LOGIN_ACK = 1;
+    MESSAGE_REQ = 2;
+    MESSAGE_NFY = 3;
+}
+
+enum ResultType {
+    RESULT_SUCCESS = 0;
+    RESULT_FAILED = 1;
+}

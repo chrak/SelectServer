@@ -1,0 +1,9 @@
+
+namespace packets;
+
+table LoginReq {
+	id:string;
+	pass:string;
+}
+
+root_type LoginReq;

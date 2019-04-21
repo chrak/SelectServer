@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="LoginAck_generated.h" />
+    <ClInclude Include="LoginReq_generated.h" />
+    <ClInclude Include="MessageNfy_generated.h" />
+    <ClInclude Include="MessageReq_generated.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="flat">
+      <UniqueIdentifier>{1c2402e2-bbbc-4106-a240-745ef671d1ab}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="flat\LoginAck.fbs">
+      <Filter>flat</Filter>
+    </None>
+    <None Include="flat\LoginReq.fbs">
+      <Filter>flat</Filter>
+    </None>
+    <None Include="flat\MessageNfy.fbs">
+      <Filter>flat</Filter>
+    </None>
+    <None Include="flat\MessageReq.fbs">
+      <Filter>flat</Filter>
+    </None>
+  </ItemGroup>
+</Project>
