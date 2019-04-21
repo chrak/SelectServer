@@ -23,8 +23,10 @@ public:
 	struct SSendInfo
 	{
 		char* pBuf;
+		__int32 RemainLen;
 
 		SSendInfo() :
+			RemainLen(0),
 			pBuf(NULL)
 		{
 		}
@@ -33,18 +35,18 @@ public:
 	struct SRecvInfo
 	{
 		char* pBuf;
-		__int32 prevRecvPos;
-		__int32 remainLen;
+		__int32 PrevRecvPos;
+		__int32 RemainLen;
 
 		SRecvInfo() :
 			pBuf(NULL),
-			prevRecvPos(0),
-			remainLen(0)
+			PrevRecvPos(0),
+			RemainLen(0)
 		{
 		}
 	};
 
-private:
+protected:
 	INDEX  m_Index;
 	SOCKET m_Socket;
 	SSendInfo m_sendInfo;
@@ -62,6 +64,7 @@ public:
 	inline INDEX  GetIndex() { return m_Index; }
 	inline SSendInfo& GetSendRef() { return m_sendInfo; }
 	inline SRecvInfo& GetRecvRef() { return m_recvInfo; }
+	inline bool IsConnected() const { return m_IsConnected; }
 
 	bool SendPacket(packetdef::E_PACKET_ID packetId_, flatbuffers::FlatBufferBuilder& builder_);
 

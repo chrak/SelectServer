@@ -94,6 +94,5 @@ void CMemoryPool<T>::ReleasePool()
 
 		obj->~CPoolObject();
 		SAFE_FREE(obj);
-
 	}
 }

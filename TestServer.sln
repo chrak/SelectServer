@@ -4,6 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestClient", "TestClient\TestClient.vcxproj", "{D7B07849-93E7-4C3C-A622-D12C8674146D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{88FFE53A-625A-4D97-9753-ACD576C2B9C2} = {88FFE53A-625A-4D97-9753-ACD576C2B9C2}
+		{25F9DB72-2ED3-44A1-9E1B-00CF19C0798E} = {25F9DB72-2ED3-44A1-9E1B-00CF19C0798E}
+		{223F9EDE-D9E5-484B-9D89-FC91FCB75E39} = {223F9EDE-D9E5-484B-9D89-FC91FCB75E39}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestCommonLib", "TestCommonLib\TestCommonLib.vcxproj", "{25F9DB72-2ED3-44A1-9E1B-00CF19C0798E}"
 EndProject

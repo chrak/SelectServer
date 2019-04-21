@@ -33,9 +33,6 @@
     <ClInclude Include="Receiver.h">
       <Filter>Network</Filter>
     </ClInclude>
-    <ClInclude Include="ServerTask.h">
-      <Filter>Server</Filter>
-    </ClInclude>
     <ClInclude Include="ServerBase.h">
       <Filter>Server</Filter>
     </ClInclude>
@@ -50,6 +47,9 @@
     </ClInclude>
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Connector.h">
+      <Filter>Network</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NetworkSelectMode.cpp">
@@ -67,16 +67,13 @@
     <ClCompile Include="ServerBase.cpp">
       <Filter>Server</Filter>
     </ClCompile>
-    <ClCompile Include="ServerTask.cpp">
-      <Filter>Server</Filter>
-    </ClCompile>
-    <ClCompile Include="SessionManager.cpp">
-      <Filter>Network</Filter>
-    </ClCompile>
     <ClCompile Include="Session.cpp">
       <Filter>Network</Filter>
     </ClCompile>
     <ClCompile Include="TestServer.cpp" />
     <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="Connector.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

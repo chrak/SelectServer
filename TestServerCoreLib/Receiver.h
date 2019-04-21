@@ -9,27 +9,29 @@
 class CServerBase;
 class CSession;
 class CTaskBase;
-class CReciever :
-	public CTaskThreadRegister<CReciever>,
+class CReceiver :
+	public CTaskThreadRegister<CReceiver>,
 	public CMemoryPool<SRecvTask>
 {
 public:
 	typedef std::map<packetdef::PACKET_NUMBER, CMessageContextBase*> CONTEXT_HANDLER_MAP;
 
+
 private:
-	CServerBase* m_pServer;  ///< 서버
 	CONTEXT_HANDLER_MAP m_ContextMessageMap;
 
 public:
-	CReciever(CServerBase* server_);
-	~CReciever();
+	CReceiver();
+	~CReceiver();
 
 public:
 	bool Start();
-
 	bool RegistContext(packetdef::PacketRegion const region_, CMessageContextBase* context_);
 	bool PushTask(__int32 index_, SRecvTask::SInfo& param_);
+	
 	bool DistributePacket(CSession* session_);
+	bool ProcessMessage(SRecvTask* task_);
+	inline bool IsRegistedMessaseContext() { return !m_ContextMessageMap.empty(); }
 
 	/// 쓰레드 처리
 	virtual bool Process(CTaskBase*) override;

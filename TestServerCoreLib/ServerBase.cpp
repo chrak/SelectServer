@@ -5,7 +5,7 @@
 
 CServerBase::CServerBase()
 	: m_Listener(this),
-	  m_Receiver(this)
+	  m_Receiver()
 {
 }
 

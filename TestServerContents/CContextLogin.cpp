@@ -5,6 +5,10 @@
 #include "../Packet/LoginReq_generated.h"
 #include "../Packet/LoginAck_generated.h"
 
+#include "../Packet/MessageReq_generated.h"
+#include "../Packet/MessageNfy_generated.h"
+
+
 using namespace packetdef;
 
 
@@ -30,12 +34,30 @@ bool CContextLogin::MessageProc(CSession::INDEX index_, packetdef::PacketID pack
 			auto serial = static_cast<int32_t>(index_);
 			auto userID = builder.CreateString(id);
 			auto result = packets::ResultType_RESULT_SUCCESS;
+
 			auto ack = packets::CreateLoginAck(builder, serial, userID, result);
 			builder.Finish(ack);
-			CSessionManager::GetInstance()->SendSession(index_, packetId_, builder);
-				
+			CSessionManager<CSession>::GetInstance()->SendSession(index_, packetId_, builder);
 		}
 		break;
+
+	case packetdef::MessageReq:
+		{
+			auto req = DESERIALIZE(MessageReq, buff_);
+			auto userId = req->userId();
+			auto message = req->message()->c_str();
+
+			flatbuffers::FlatBufferBuilder builder;
+			auto serial = static_cast<int32_t>(index_);
+			auto userName = builder.CreateString("¾Æ¹«°³");
+			auto messageNty = builder.CreateString(message);
+
+			auto ack = packets::CreateMessageNfy(builder, serial, userName, messageNty);
+			builder.Finish(ack);
+			CSessionManager<CSession>::GetInstance()->SendSessionAll(packetId_, builder);
+		}
+		break;
+
 
 	default:
 		return false;

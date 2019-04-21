@@ -8,9 +8,9 @@
 
 namespace packets {
 
-struct Messagenfy;
+struct MessageNfy;
 
-struct Messagenfy FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+struct MessageNfy FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   enum {
     VT_USERID = 4,
     VT_USERNAME = 6,
@@ -36,81 +36,81 @@ struct Messagenfy FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   }
 };
 
-struct MessagenfyBuilder {
+struct MessageNfyBuilder {
   flatbuffers::FlatBufferBuilder &fbb_;
   flatbuffers::uoffset_t start_;
   void add_userId(int32_t userId) {
-    fbb_.AddElement<int32_t>(Messagenfy::VT_USERID, userId, 0);
+    fbb_.AddElement<int32_t>(MessageNfy::VT_USERID, userId, 0);
   }
   void add_userName(flatbuffers::Offset<flatbuffers::String> userName) {
-    fbb_.AddOffset(Messagenfy::VT_USERNAME, userName);
+    fbb_.AddOffset(MessageNfy::VT_USERNAME, userName);
   }
   void add_message(flatbuffers::Offset<flatbuffers::String> message) {
-    fbb_.AddOffset(Messagenfy::VT_MESSAGE, message);
+    fbb_.AddOffset(MessageNfy::VT_MESSAGE, message);
   }
-  explicit MessagenfyBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+  explicit MessageNfyBuilder(flatbuffers::FlatBufferBuilder &_fbb)
         : fbb_(_fbb) {
     start_ = fbb_.StartTable();
   }
-  MessagenfyBuilder &operator=(const MessagenfyBuilder &);
-  flatbuffers::Offset<Messagenfy> Finish() {
+  MessageNfyBuilder &operator=(const MessageNfyBuilder &);
+  flatbuffers::Offset<MessageNfy> Finish() {
     const auto end = fbb_.EndTable(start_);
-    auto o = flatbuffers::Offset<Messagenfy>(end);
+    auto o = flatbuffers::Offset<MessageNfy>(end);
     return o;
   }
 };
 
-inline flatbuffers::Offset<Messagenfy> CreateMessagenfy(
+inline flatbuffers::Offset<MessageNfy> CreateMessageNfy(
     flatbuffers::FlatBufferBuilder &_fbb,
     int32_t userId = 0,
     flatbuffers::Offset<flatbuffers::String> userName = 0,
     flatbuffers::Offset<flatbuffers::String> message = 0) {
-  MessagenfyBuilder builder_(_fbb);
+  MessageNfyBuilder builder_(_fbb);
   builder_.add_message(message);
   builder_.add_userName(userName);
   builder_.add_userId(userId);
   return builder_.Finish();
 }
 
-inline flatbuffers::Offset<Messagenfy> CreateMessagenfyDirect(
+inline flatbuffers::Offset<MessageNfy> CreateMessageNfyDirect(
     flatbuffers::FlatBufferBuilder &_fbb,
     int32_t userId = 0,
     const char *userName = nullptr,
     const char *message = nullptr) {
-  return packets::CreateMessagenfy(
+  return packets::CreateMessageNfy(
       _fbb,
       userId,
       userName ? _fbb.CreateString(userName) : 0,
       message ? _fbb.CreateString(message) : 0);
 }
 
-inline const packets::Messagenfy *GetMessagenfy(const void *buf) {
-  return flatbuffers::GetRoot<packets::Messagenfy>(buf);
+inline const packets::MessageNfy *GetMessageNfy(const void *buf) {
+  return flatbuffers::GetRoot<packets::MessageNfy>(buf);
 }
 
-inline const packets::Messagenfy *GetSizePrefixedMessagenfy(const void *buf) {
-  return flatbuffers::GetSizePrefixedRoot<packets::Messagenfy>(buf);
+inline const packets::MessageNfy *GetSizePrefixedMessageNfy(const void *buf) {
+  return flatbuffers::GetSizePrefixedRoot<packets::MessageNfy>(buf);
 }
 
-inline bool VerifyMessagenfyBuffer(
+inline bool VerifyMessageNfyBuffer(
     flatbuffers::Verifier &verifier) {
-  return verifier.VerifyBuffer<packets::Messagenfy>(nullptr);
+  return verifier.VerifyBuffer<packets::MessageNfy>(nullptr);
 }
 
-inline bool VerifySizePrefixedMessagenfyBuffer(
+inline bool VerifySizePrefixedMessageNfyBuffer(
     flatbuffers::Verifier &verifier) {
-  return verifier.VerifySizePrefixedBuffer<packets::Messagenfy>(nullptr);
+  return verifier.VerifySizePrefixedBuffer<packets::MessageNfy>(nullptr);
 }
 
-inline void FinishMessagenfyBuffer(
+inline void FinishMessageNfyBuffer(
     flatbuffers::FlatBufferBuilder &fbb,
-    flatbuffers::Offset<packets::Messagenfy> root) {
+    flatbuffers::Offset<packets::MessageNfy> root) {
   fbb.Finish(root);
 }
 
-inline void FinishSizePrefixedMessagenfyBuffer(
+inline void FinishSizePrefixedMessageNfyBuffer(
     flatbuffers::FlatBufferBuilder &fbb,
-    flatbuffers::Offset<packets::Messagenfy> root) {
+    flatbuffers::Offset<packets::MessageNfy> root) {
   fbb.FinishSizePrefixed(root);
 }
 

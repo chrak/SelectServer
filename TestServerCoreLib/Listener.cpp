@@ -23,14 +23,7 @@ bool CListener::Start(CNetworkMode::SConfigInfo const& config_)
 	servAddr.sin_addr.s_addr = htonl(INADDR_ANY);
 	servAddr.sin_port = htons(config_.PortNumber);
 	m_ListenPort = config_.PortNumber;
-
-	//LINGER ls;
-	//ls.l_onoff = 1;
-	//ls.l_linger = 0;
-	//::setsockopt(m_listenSocket, SOL_SOCKET, SO_LINGER, reinterpret_cast<const char *>(&ls), sizeof(ls));
-	
-	//bool bValid = true;
-	//::setsockopt(m_ListenSocket, SOL_SOCKET, SO_REUSEADDR, reinterpret_cast<const char *>(&bValid), sizeof(bValid));
+	m_pServer->GetNetworkMode()->SetSockOption(m_ListenSocket);
 
 	if (::bind(m_ListenSocket, (SOCKADDR*)&servAddr, sizeof(servAddr)) == SOCKET_ERROR)
 	{

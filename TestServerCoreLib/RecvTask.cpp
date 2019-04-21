@@ -39,6 +39,5 @@ bool SRecvTask::Acquire(void* param_)
 
 bool SRecvTask::Retrieve()
 {
-	//m_sendInfo.pBuf = ALLOCATE_MALLOC(char, PACKET_REMAIN_SIZE);
 	return true;
 }

@@ -15,12 +15,10 @@ public:
 	~CNetworkSelectMode();
 
 public:
-	virtual void Init(SOCKET socket_, SConfigInfo const& config_) override;
+	virtual void Init(SOCKET const socket_, SConfigInfo const& config_) override;
 	virtual bool TransferProcess(CServerBase* server_) override;
 	virtual bool LoginProcess(CServerBase* server_) override;
-	
-	bool RecvProcess(CSession* session_);
-
-
-	void CloseProcess(CSession* session_);
+	virtual bool RecvProcess(CSession* session_) override;
+	virtual void CloseProcess(CSession* session_) override;
+	virtual void SetSockOption(SOCKET const socket_) override;
 };

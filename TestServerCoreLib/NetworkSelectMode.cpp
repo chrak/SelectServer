@@ -5,9 +5,6 @@
 #include "ServerBase.h"
 #include "PacketDef.h"
 
-//#include "flatbuffers/flatbuffers.h"
-//#include "../Packet/LoginReq_generated.h"
-
 
 CNetworkSelectMode::CNetworkSelectMode()
 {
@@ -16,14 +13,12 @@ CNetworkSelectMode::CNetworkSelectMode()
 }
 CNetworkSelectMode::~CNetworkSelectMode()
 {
-
 }
 
-void CNetworkSelectMode::Init(SOCKET socket_, SConfigInfo const& config_)
+void CNetworkSelectMode::Init(SOCKET const socket_, SConfigInfo const& config_)
 {
 	FD_ZERO(&m_MasterFd);
 	FD_SET(socket_, &m_MasterFd);
-	m_MaxSd = socket_;
 }
 
 
@@ -61,19 +56,10 @@ bool CNetworkSelectMode::TransferProcess(CServerBase* server_)
 
 	if (readableCount > 0)
 	{
-		CSessionManager::GetInstance()->ExecuteSessionAll([&](CSessionManager::SESSION_MAP sessionMap) -> bool{
+		CSessionManager<CSession>::GetInstance()->ExecuteSessionAll([&](CSessionManager<CSession>::SESSION_MAP const& sessionMap) -> bool{
 			for (auto const & pair : sessionMap)
 			{
 				auto session = pair.second;
-
-				/*
-				select(0, 0, &writeSet, 0, 0);
-				if (FD_ISSET(session->GetSocket(), &writeSet))
-				{
-					int aa = 0;
-				}
-				*/
-
 				if (FD_ISSET(session->GetSocket(), &readSet))
 				{
 					if (RecvProcess(session))
@@ -92,7 +78,6 @@ bool CNetworkSelectMode::TransferProcess(CServerBase* server_)
 			return true;
 		});
 	}
-
 
 	return true;
 }
@@ -123,9 +108,10 @@ bool CNetworkSelectMode::LoginProcess(CServerBase* server_)
 			return false;
 		}
 
-		auto session = CSessionManager::GetInstance()->NewSession(clientSocket);
+		CSession* session = CSessionManager<CSession>::GetInstance()->NewSession(clientSocket);
 		if (session)
 		{
+			SetSockOption(session->GetSocket());
 			FD_SET(session->GetSocket(), &m_MasterFd);
 		}
 		else
@@ -141,15 +127,21 @@ bool CNetworkSelectMode::LoginProcess(CServerBase* server_)
 
 bool CNetworkSelectMode::RecvProcess(CSession* session_)
 {
+	if (!session_->IsConnected())
+	{
+		// 로그
+		return false;
+	}
+
 	__int32 recvPos = 0;
 
 	/// 남아있는 버퍼가 있었다면 그 버퍼를 가장 앞단에 두고 그 다음부터 받게끔 처리 
-	if (session_->GetRecvRef().remainLen > 0)
+	if (session_->GetRecvRef().RemainLen > 0)
 	{
 		auto recvInfo = session_->GetRecvRef();
 
-		::memcpy_s(&recvInfo.pBuf, recvInfo.remainLen, &recvInfo.pBuf + recvInfo.prevRecvPos, recvInfo.remainLen);
-		recvPos += recvInfo.remainLen;
+		::memcpy_s(&recvInfo.pBuf, recvInfo.RemainLen, &recvInfo.pBuf + recvInfo.PrevRecvPos, recvInfo.RemainLen);
+		recvPos += recvInfo.RemainLen;
 	}
 
 	do
@@ -173,11 +165,12 @@ bool CNetworkSelectMode::RecvProcess(CSession* session_)
 			if (error != WSA_IO_PENDING)
 			{
 				// 에러
+				CloseProcess(session_);
 				return false;
 			}
 		}
 
-		session_->GetRecvRef().remainLen += recvLen;
+		session_->GetRecvRef().RemainLen += recvLen;
 	} while (false);
 
 	return true;
@@ -187,7 +180,23 @@ bool CNetworkSelectMode::RecvProcess(CSession* session_)
 void CNetworkSelectMode::CloseProcess(CSession* session_)
 {
 	FD_CLR(session_->GetSocket(), &m_MasterFd);
-	CSessionManager::GetInstance()->ReleaseSession(session_);
+	CSessionManager<CSession>::GetInstance()->ReleaseSession(session_);
+}
+
+void CNetworkSelectMode::SetSockOption(SOCKET const socket_)
+{
+	//LINGER ls;
+	//ls.l_onoff = 1;
+	//ls.l_linger = 0;
+	//::setsockopt(m_listenSocket, SOL_SOCKET, SO_LINGER, reinterpret_cast<const char *>(&ls), sizeof(ls));
+
+	bool bValid = true;
+	::setsockopt(socket_, SOL_SOCKET, SO_REUSEADDR, reinterpret_cast<const char *>(&bValid), sizeof(bValid));
+
+	__int32 resvSize = PACKET_SIZE;
+	__int32 sendSize = PACKET_SIZE;
+	setsockopt(socket_, SOL_SOCKET, SO_RCVBUF, (char*)&resvSize, sizeof(resvSize));
+	setsockopt(socket_, SOL_SOCKET, SO_SNDBUF, (char*)&sendSize, sizeof(sendSize));
 }
 
 

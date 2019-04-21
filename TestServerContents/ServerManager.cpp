@@ -16,7 +16,7 @@ void CServerManager::DerivedInit()
 	::WSAStartup(versionRequested, &wsaData);
 
 	/// 이곳에서 싱글턴을 사용하는 클래스들을 모두 초기화한다.
-	CSessionManager::Init();
+	CSessionManager<CSession>::Init();
 }
 
 void CServerManager::DerivedRelease()
@@ -25,7 +25,7 @@ void CServerManager::DerivedRelease()
 	::WSACleanup();
 
 	/// 이곳에서 싱글턴을 사용하는 클래스들을 모두 해제한다.
-	CSessionManager::Release();
+	CSessionManager<CSession>::Release();
 }
 
 
@@ -101,5 +101,4 @@ void CServerManager::Close()
 
 		SAFE_DELETE(server);
 	}
-
 }

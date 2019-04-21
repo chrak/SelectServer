@@ -6,54 +6,39 @@
 #include "Structure.h"
 
 
-CReciever::CReciever(CServerBase* server_)
-	: m_pServer(server_),
-	CMemoryPool<SRecvTask>(100, 10)
+CReceiver::CReceiver()
+	: CMemoryPool<SRecvTask>(100, 10)
 {
 
 }
 
-CReciever::~CReciever()
+CReceiver::~CReceiver()
 {
-
 }
 
 
-bool CReciever::Start()
+bool CReceiver::Start()
 {
 	__super::RegisterThreadFunc(5, true);
 
 	return true;
 }
 
-bool CReciever::RegistContext(packetdef::PacketRegion const region_, CMessageContextBase* context_)
+
+bool CReceiver::RegistContext(packetdef::PacketRegion const region_, CMessageContextBase* context_)
 {
 	auto result = m_ContextMessageMap.insert(std::make_pair(region_, context_));
 	return result.second;
 }
 
 
-bool CReciever::PushTask(__int32 index_, SRecvTask::SInfo& param_)
-{
-	SRecvTask* task;
-	if (AcquirePoolObject(task, &param_))
-	{
-		__int32 distIndex = index_ % GetThreadCount();
-		__super::PushTask(distIndex, task);
-		return true;
-	}
-
-	return false;
-}
-
-
-bool CReciever::DistributePacket(CSession* session_)
+bool CReceiver::DistributePacket(CSession* session_)
 {
 	packets::SHeader* header = NULL;;
 
-	auto remainLen = session_->GetRecvRef().remainLen;
+	auto remainLen = session_->GetRecvRef().RemainLen;
 	auto readPos = 0;
-	
+
 	while (remainLen >= packets::PACKET_HEADER_SIZE)
 	{
 		/// 여기서 굳이 복사할 필요가 없다...
@@ -81,21 +66,42 @@ bool CReciever::DistributePacket(CSession* session_)
 		readPos += (packets::PACKET_HEADER_SIZE + packetBodyLen);
 		remainLen -= readPos;
 
-		PushTask(session_->GetIndex(), info);  
+		PushTask(session_->GetIndex(), info);
 	}
 
-	session_->GetRecvRef().remainLen -= readPos;
-	session_->GetRecvRef().prevRecvPos = readPos;
+	session_->GetRecvRef().RemainLen -= readPos;
+	session_->GetRecvRef().PrevRecvPos = readPos;
 
 	return true;
 }
 
 
-bool CReciever::Process(CTaskBase* task_)
+bool CReceiver::PushTask(__int32 index_, SRecvTask::SInfo& param_)
+{
+	SRecvTask* task;
+	if (AcquirePoolObject(task, &param_))
+	{
+		__int32 distIndex = index_ % GetThreadCount();
+		__super::PushTask(distIndex, task);
+		return true;
+	}
+
+	return false;
+}
+
+
+bool CReceiver::Process(CTaskBase* task_)
 {
 	auto task = static_cast<SRecvTask*>(task_);
+	auto result = ProcessMessage(task);
 
-	packetdef::PACKET_NUMBER region = 0xff00 & task->PacketId;
+	return result;
+}
+
+
+bool CReceiver::ProcessMessage(SRecvTask* task_)
+{
+	packetdef::PACKET_NUMBER region = 0xff00 & task_->PacketId;
 
 	auto itor = m_ContextMessageMap.find(region);
 	if (itor == m_ContextMessageMap.end())
@@ -103,16 +109,16 @@ bool CReciever::Process(CTaskBase* task_)
 		return false;
 	}
 
-	auto index = task->Index;
-	auto packetId = task->PacketId;
-	auto buffer = task->pBuffer;
+	auto index = task_->Index;
+	auto packetId = task_->PacketId;
+	auto buffer = task_->pBuffer;
 	(*itor).second->MessageProc(index, packetId, buffer);
 
 	return true;
 }
 
 
-void CReciever::Close()
+void CReceiver::Close()
 {
 	__super::Close();
 	

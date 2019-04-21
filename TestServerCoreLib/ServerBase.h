@@ -27,10 +27,8 @@ protected:
 
 	SOCKADDR_IN m_ServerAddr;
 	CListener m_Listener;
-	CReciever m_Receiver;
-
+	CReceiver m_Receiver;
 	CNetworkMode* m_pNetworkMode;       ///< 네트워크 모드
-
 
 	bool m_IsInit;                ///< 초기화 완료 유무
 	bool m_IsRunning;             ///< 쓰레드 실행중 유무
@@ -40,7 +38,7 @@ public:
 	inline CListener& GetListenerRef() { return m_Listener; }
 
 	/// 리시버 레퍼런스 획득
-	inline CReciever& GetRecieverRef() { return m_Receiver; }
+	inline CReceiver& GetRecieverRef() { return m_Receiver; }
 
 	/// 서버타입 획득
 	inline ServerType GetServerType() { return m_ServerType; }

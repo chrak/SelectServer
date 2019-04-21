@@ -7,7 +7,6 @@
 #include "NetworkMode.h"
 
 
-
 class CServerBase;
 class CServerManager :
 	public CSingleton<CServerManager>

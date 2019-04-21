@@ -2,10 +2,10 @@
 namespace packets;
 
 
-table Messagenfy {
+table MessageNfy {
 	userId:int;
 	userName:string;
 	message:string;
 }
 
-root_type Messagenfy;
+root_type MessageNfy;

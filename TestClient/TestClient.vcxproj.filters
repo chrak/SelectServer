@@ -3,8 +3,12 @@
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="TestClient.cpp" />
+    <ClCompile Include="DummyClient.cpp" />
+    <ClCompile Include="DummyCommandTask.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
+    <ClInclude Include="DummyClient.h" />
+    <ClInclude Include="DummyCommandTask.h" />
   </ItemGroup>
 </Project>

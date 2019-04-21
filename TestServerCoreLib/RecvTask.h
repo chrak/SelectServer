@@ -15,10 +15,10 @@ struct SRecvTask :
 		void* pBuffer;
 	};
 
-	CSession::INDEX    Index;
-	packetdef::PacketID  PacketId;
-	__int32            Length;
-	char               pBuffer[PACKET_SIZE];
+	CSession::INDEX     Index;
+	packetdef::PacketID PacketId;
+	__int32             Length;
+	char                pBuffer[PACKET_SIZE];
 
 	SRecvTask();
 	~SRecvTask();
