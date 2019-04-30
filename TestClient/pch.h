@@ -20,6 +20,9 @@
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
 
 // TODO: 여기에 미리 컴파일하려는 헤더 추가
+
+#include <Windows.h>
+
 #ifdef _DEBUG
 #pragma comment(lib, "tbb_debug.lib")
 #pragma comment(lib, "libprotobufd.lib")

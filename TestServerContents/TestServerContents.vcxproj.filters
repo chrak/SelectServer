@@ -13,9 +13,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
-    <ClCompile Include="CContextLogin.cpp">
-      <Filter>Contents</Filter>
-    </ClCompile>
     <ClCompile Include="ServerManager.cpp">
       <Filter>Server</Filter>
     </ClCompile>
@@ -23,17 +20,20 @@
       <Filter>Server\Impl</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="LoginContext.cpp">
+      <Filter>Contents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="CContextLogin.h">
-      <Filter>Contents</Filter>
-    </ClInclude>
     <ClInclude Include="ServerManager.h">
       <Filter>Server</Filter>
     </ClInclude>
     <ClInclude Include="ContentsServer.h">
       <Filter>Server\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginContext.h">
+      <Filter>Contents</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

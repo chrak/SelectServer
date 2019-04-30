@@ -17,9 +17,9 @@ CReceiver::~CReceiver()
 }
 
 
-bool CReceiver::Start()
+bool CReceiver::Start(CNetworkMode::SConfigInfo const& config_)
 {
-	__super::RegisterThreadFunc(5, true);
+	__super::RegisterThreadFunc(config_.RecvThreadCount, true);
 
 	return true;
 }

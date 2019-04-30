@@ -3,7 +3,7 @@
 #include "ServerManager.h"
 #include "ServerBase.h"
 #include "ContentsServer.h"
-#include "CContextLogin.h"
+#include "LoginContext.h"
 #include "NetworkSelectMode.h"
 #include "PacketDef.h"
 #include <WinSock2.h>
@@ -37,7 +37,7 @@ bool CServerManager::RegistServer(CNetworkMode::SConfigInfo const& info_)
 	case ServerType::CONTENTS_SERVER_TYPE:
 		server = ALLOCATE_NEW(CContentsServer);
 		server->AttachNetworkMode(ALLOCATE_NEW(CNetworkSelectMode));
-		server->RegistContext(packetdef::REGION_LOGIN, ALLOCATE_NEW(CContextLogin));
+		server->RegistContext(packetdef::REGION_LOGIN, ALLOCATE_NEW(CLoginContext));
 		break;
 	}
 

@@ -1,8 +1,10 @@
+#include "pch.h"
 #include "DummyClient.h"
 #include "DummyCommandTask.h"
 #include "SessionManager.h"
 #include "flatbuffers/flatbuffers.h"
 #include "../Packet/LoginReq_generated.h"
+#include "../Packet/MessageReq_generated.h"
 
 
 void CDummyClient::DerivedInit()
@@ -16,7 +18,7 @@ void CDummyClient::DerivedRelease()
 	CSessionManager<CConnector>::GetInstance()->Release();
 }
 
-void CDummyClient::Init(SInfo const& info_)
+void CDummyClient::InitInfo(SInfo const& info_)
 {
 	m_DummyClientInfo.ConnectionAddr = info_.ConnectionAddr;
 	m_DummyClientInfo.PortNumber = info_.PortNumber;
@@ -26,7 +28,7 @@ void CDummyClient::Init(SInfo const& info_)
 
 bool CDummyClient::RegistContext(packetdef::PacketRegion const region_, CMessageContextBase* context_)
 {
-	CSessionManager<CConnector>::GetInstance()->ExecuteSessionAll([&](CSessionManager<CConnector>::SESSION_MAP const& sessionMap) -> bool {
+	auto result = CSessionManager<CConnector>::GetInstance()->ExecuteSessionAll([&](CSessionManager<CConnector>::SESSION_MAP const& sessionMap) -> bool {
 		for (auto pair : sessionMap)
 		{
 			auto connector = static_cast<CConnector*>(pair.second);
@@ -38,6 +40,8 @@ bool CDummyClient::RegistContext(packetdef::PacketRegion const region_, CMessage
 
 		return true;
 	});
+
+	return result;
 }
 
 
@@ -48,6 +52,7 @@ bool CDummyClient::Start()
 	CConnector::SInfo info;
 	info.ConnectionAddr = m_DummyClientInfo.ConnectionAddr;
 	info.PortNumber = m_DummyClientInfo.PortNumber;
+	info.ReceiverThreadCount = 1;
 
 	for (auto i = 0; i < dummyCount; ++i)
 	{
@@ -63,6 +68,7 @@ bool CDummyClient::Start()
 		connector->Start(info);
 	}
 
+	m_IsRunning = true;
 	__super::RegisterThreadFunc(1, true);
 
 	return true;
@@ -84,11 +90,11 @@ bool CDummyClient::Process(CTaskBase* task_)
 	case CDummyCommandTask::CHAT_TYPE:
 		{
 			flatbuffers::FlatBufferBuilder builder;
-			auto id = builder.CreateString("Test!!");
-			auto pass = builder.CreateString("Hello!!");
-			auto req = packets::CreateLoginReq(builder, id, pass);
+			auto userId = 17;
+			auto message = builder.CreateString("Hello!!");
+			auto req = packets::CreateMessageReq(builder, userId, message);
 			builder.Finish(req);
-			CSessionManager<CConnector>::GetInstance()->SendSessionAll(packetdef::LoginReq, builder);
+			CSessionManager<CConnector>::GetInstance()->SendSessionAll(packetdef::MessageReq, builder);
 		}
 		break;
 
@@ -102,8 +108,16 @@ bool CDummyClient::Process(CTaskBase* task_)
 			CSessionManager<CConnector>::GetInstance()->SendSessionAll(packetdef::LoginReq, builder);
 		}
 		break;
-		
+
+	case CDummyCommandTask::EXIT_TYPE:
+		{
+			m_IsRunning = false;
+		}
+		break;
+
 	}
+
+	return true;
 }
 
 	

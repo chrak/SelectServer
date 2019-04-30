@@ -157,12 +157,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="DummyClientContext.h" />
     <ClInclude Include="DummyCommandTask.h" />
     <ClInclude Include="DummyClient.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DummyClient.cpp" />
+    <ClCompile Include="DummyClientContext.cpp" />
     <ClCompile Include="DummyCommandTask.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

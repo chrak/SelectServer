@@ -5,10 +5,21 @@
     <ClCompile Include="TestClient.cpp" />
     <ClCompile Include="DummyClient.cpp" />
     <ClCompile Include="DummyCommandTask.cpp" />
+    <ClCompile Include="DummyClientContext.cpp">
+      <Filter>Contents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="DummyClient.h" />
     <ClInclude Include="DummyCommandTask.h" />
+    <ClInclude Include="DummyClientContext.h">
+      <Filter>Contents</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Contents">
+      <UniqueIdentifier>{68af0e8b-e954-436d-8336-a288f52f9c39}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

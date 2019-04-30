@@ -72,7 +72,7 @@ public:
 		++m_CurrentIndex;
 
 		CSession::SInfo info;
-		info.Socket = session_->GetSocket;
+		info.Socket = session_->GetSocket();
 		info.Index = m_CurrentIndex;
 		if (!session_->Acquire(&info))
 		{

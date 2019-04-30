@@ -44,8 +44,11 @@ bool CServerBase::Start()
 		return false;
 	}
 
+
+	
+
 	m_Listener.Start(m_ServerInfo);
-	m_Receiver.Start();
+	m_Receiver.Start(m_ServerInfo);
 
 	__super::RegisterThreadFunc(1, false);
 

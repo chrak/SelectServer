@@ -6,7 +6,6 @@
 #include <winsock2.h>
 #include <map>
 #include "NetworkMode.h"
-#include "ServerTask.h"
 #include "ThreadRegister.hpp"
 #include "Listener.h"
 #include "Receiver.h"

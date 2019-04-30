@@ -38,7 +38,7 @@ bool CConnector::Start(SInfo const& info_)
 		return false;
 	}
 
-	if (!m_Receiver.Start())
+	if (!m_Receiver.Start(info_.ReceiverThreadCount))
 	{
 		// ·Î±×
 		Close();

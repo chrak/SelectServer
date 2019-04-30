@@ -157,13 +157,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="CContextLogin.h" />
+    <ClInclude Include="LoginContext.h" />
     <ClInclude Include="ContentsServer.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="ServerManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CContextLogin.cpp" />
+    <ClCompile Include="LoginContext.cpp" />
     <ClCompile Include="ContentsServer.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

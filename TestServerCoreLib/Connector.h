@@ -13,6 +13,7 @@ public:
 	{
 		std::string ConnectionAddr;
 		__int16 PortNumber;
+		__int32 ReceiverThreadCount;
 	};
 
 public:

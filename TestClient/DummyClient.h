@@ -27,7 +27,7 @@ public:
 
 public:
 	/// 초기화
-	void Init(SInfo const& info_);
+	void InitInfo(SInfo const& info_);
 
 	/// 메시지 컨텍스트 등록
 	bool RegistContext(packetdef::PacketRegion const region_, CMessageContextBase* context_);

@@ -12,6 +12,7 @@ struct CDummyCommandTask
 		NONE,
 		LOGIN_TYPE,
 		CHAT_TYPE,
+		EXIT_TYPE,
 	};
 
 	struct SInfo

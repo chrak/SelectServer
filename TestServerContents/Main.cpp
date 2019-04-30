@@ -22,7 +22,6 @@
 #include <winsock2.h>
 
 
-
 int main()
 {
 	CServerManager::Init();

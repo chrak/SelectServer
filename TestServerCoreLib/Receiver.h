@@ -25,7 +25,7 @@ public:
 	~CReceiver();
 
 public:
-	bool Start();
+	bool Start(CNetworkMode::SConfigInfo const& config_);
 	bool RegistContext(packetdef::PacketRegion const region_, CMessageContextBase* context_);
 	bool PushTask(__int32 index_, SRecvTask::SInfo& param_);
 	
